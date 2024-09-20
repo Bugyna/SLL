@@ -1,6 +1,9 @@
 #pragma once
 #include <stdio.h>
 
+#define ITERATE_LIST_PTR(L_TYPE, L_NAME, NAME)\
+for (L_TYPE##_NODE* NAME = L_NAME->first; NAME != NULL && NAME->val != NULL; NAME = NAME->next)
+
 #define ITERATE_LINKED_LIST(LIST_TYPE, LIST, VAL_TYPE)\
 LIST_TYPE##_NODE* NODE = LIST_TYPE##_GET_NODE(LIST);\
 VAL_TYPE* val = NULL;\
@@ -68,8 +71,8 @@ void NAME##_APPEND(NAME* l, VAL_TYPE* val)\
 	if (l->last->val == NULL) {\
 		l->last->val = val;\
 		l->last->next = NULL;\
-	return;\
-}\
+		return;\
+	}\
 	NAME##_NODE* tmp = malloc(sizeof(NAME##_NODE));\
 	tmp->val = val;\
 	tmp->prev = l->last;\
